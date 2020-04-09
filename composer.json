@@ -1,0 +1,13 @@
+{
+    "name": "norival/hathi",
+    "description": "A lightweight MVC php framework",
+    "type": "library",
+    "license": "GPL",
+    "authors": [
+        {
+            "name": "Xavier Laviron",
+            "email": "xavier@norival.dev"
+        }
+    ],
+    "require": {}
+}
