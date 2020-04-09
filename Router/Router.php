@@ -2,6 +2,11 @@
 
 namespace Norival\Phable\Router;
 
+/**
+ * Router class
+ *
+ * @author Xavier Laviron <xavier@norival.dev>
+ */
 class Router
 {
     /** @var RouteInterface[] $routes */
@@ -16,10 +21,10 @@ class Router
      *
      * @param  string $name
      * @param  string $path
-     * @param  array $controller
+     * @param  string $controller
      * @return self
      */
-    public function addRoute(string $name, string $path, array $controller): self
+    public function addRoute(string $name, string $path, string $controller): self
     {
         $this->routes[] = new Route(
             $name,
@@ -30,28 +35,36 @@ class Router
         return $this;
     }
 
+    /**
+     * Resolve a route from a pattern
+     *
+     * @param  string $pattern
+     * @throws \Exception
+     * @return void
+     */
     public function resolve(string $pattern): void
     {
-        $controllerClass  = null;
-        $controllerMethod = null;
-        $parameters       = null;
+        $controller = null;
+        $parameters = null;
 
         foreach ($this->routes as $route) {
             if ($route->match($pattern)) {
-                $controllerClass  = $route->getController()[0];
-                $controllerMethod = $route->getController()[1];
-                $parameters       = $route->getParameters();
+                $controller = explode('@', $route->getController());
+                $parameters = $route->getParameters();
 
                 break;
             }
         }
 
-        if (!$controllerClass) {
+        if (!$controller) {
             throw new \Exception('not found');
         }
 
         // call controller method
-        $controller = new $controllerClass();
+        $controllerClass  = $controller[0];
+        $controllerMethod = $controller[1];
+        $controller       = new $controllerClass();
+
         if (!empty($parameters)) {
             $controller->$controllerMethod($parameters);
 
@@ -59,5 +72,15 @@ class Router
         }
 
         $controller->$controllerMethod();
+    }
+
+    /**
+     * Get all the routes
+     *
+     * @return array
+     */
+    public function getRoutes(): array
+    {
+        return $this->routes;
     }
 }

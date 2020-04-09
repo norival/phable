@@ -15,8 +15,8 @@ class RouteTest extends TestCase
     {
         parent::setUp();
 
-        $this->route = new Route('test', '/test/route', [AbstractController::class, 'render']);
-        $this->routeWithSlug = new Route('test', '/test/route/{slug}', [AbstractController::class, 'render']);
+        $this->route = new Route('test', '/test/route', 'HomeController@index');
+        $this->routeWithSlug = new Route('test', '/test/route/{slug}', 'HomeController@test');
     }
 
     public function testCanBeCreated(): void
@@ -51,6 +51,5 @@ class RouteTest extends TestCase
         $this->assertEmpty($this->route->getParameters());
         $this->assertCount(1, $this->routeWithSlug->getParameters());
         $this->assertArrayHasKey('slug', $this->routeWithSlug->getParameters());
-        $this->assertEquals('slug', $this->routeWithSlug->getParameters());
     }
 }

@@ -2,11 +2,17 @@
 
 namespace Norival\Phable\Router;
 
+/**
+ * Route class
+ *
+ * @author Xavier Laviron <xavier@norival.dev>
+ * @see RouteInterface
+ */
 class Route implements RouteInterface
 {
     private string $name;
     private string $pattern;
-    private array $controller;
+    private string $controller;
     private array $parameters;
 
     /**
@@ -14,9 +20,9 @@ class Route implements RouteInterface
      *
      * @param  string $name
      * @param  string $pattern
-     * @param  array $controller
+     * @param  string $controller
      */
-    public function __construct(string $name, string $pattern, array $controller)
+    public function __construct(string $name, string $pattern, string $controller)
     {
         $this->name       = $name;
         $this->pattern    = $pattern;
@@ -56,16 +62,31 @@ class Route implements RouteInterface
         return true;
     }
 
-    public function getController(): array
+    /**
+     * Get the controller associated with the route
+     *
+     * @return string
+     */
+    public function getController(): string
     {
         return $this->controller;
     }
 
+    /**
+     * Get the route parameters
+     *
+     * @return array
+     */
     public function getParameters(): array
     {
         return $this->parameters;
     }
 
+    /**
+     * Extract route parameters from slugs
+     *
+     * @return array
+     */
     private function extractParameters(): array
     {
         $pattern = explode('/', trim($this->pattern, '/'));
