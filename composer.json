@@ -14,7 +14,7 @@
             "Norival\\Phable\\": ""
         },
         "exclude-from-classmap": [
-            "/Tests/"
+            "/tests/"
         ]
     },
     "require": {
