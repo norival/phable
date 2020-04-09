@@ -40,9 +40,9 @@ class Router
      *
      * @param  string $pattern
      * @throws \Exception
-     * @return void
+     * @return int
      */
-    public function resolve(string $pattern): void
+    public function resolve(string $pattern)
     {
         $controller = null;
         $parameters = null;
@@ -63,15 +63,22 @@ class Router
         // call controller method
         $controllerClass  = $controller[0];
         $controllerMethod = $controller[1];
-        $controller       = new $controllerClass();
+
+        if (!\class_exists($controllerClass)) {
+            throw new \Exception('Class not found');
+        }
+
+        $controller = new $controllerClass();
 
         if (!empty($parameters)) {
             $controller->$controllerMethod($parameters);
 
-            return ;
+            return 1;
         }
 
         $controller->$controllerMethod();
+
+        return 1;
     }
 
     /**

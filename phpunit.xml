@@ -1,0 +1,9 @@
+<phpunit>
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">Kernel</directory>
+            <directory suffix=".php">Exceptions</directory>
+            <directory suffix=".php">Router</directory>
+        </whitelist>
+    </filter>
+</phpunit>

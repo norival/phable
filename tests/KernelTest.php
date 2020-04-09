@@ -32,4 +32,9 @@ class KernelTest extends TestCase
         $this->assertCount(2, $this->kernel->dumpRoutes());
         $this->assertInstanceOf(Route::class, $this->kernel->dumpRoutes()[0]);
     }
+
+/*     public function testHandleRequest() */
+/*     { */
+/*         /1* $path = *1/ */
+/*     } */
 }
