@@ -4,6 +4,7 @@ namespace Norival\Phable\tests;
 
 use Norival\Phable\Exceptions\NoRouteException;
 use Norival\Phable\Kernel\Kernel;
+use Norival\Phable\Router\Route;
 use PHPUnit\Framework\TestCase;
 
 class KernelTest extends TestCase
@@ -25,8 +26,10 @@ class KernelTest extends TestCase
 
     public function testBoot(): void
     {
+        /* $this->expectNotToPerformAssertions(); */
         $this->kernel->boot('tests/test_routes.php');
 
-        /* $this->expec */
+        $this->assertCount(2, $this->kernel->dumpRoutes());
+        $this->assertInstanceOf(Route::class, $this->kernel->dumpRoutes()[0]);
     }
 }

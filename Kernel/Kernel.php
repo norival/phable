@@ -26,6 +26,9 @@ class Kernel
      */
     public function boot(string $configFile): self
     {
+        /* @var $routes \Phable\Router\Route[] */
+        $routes = [];
+
         // TODO load configuration
 
         // TODO load routes from php file
@@ -36,10 +39,11 @@ class Kernel
         // instantiate the Router
         $this->router = new Router();
 
+        // read the configuration file
         require $configFile;
 
         foreach ($routes as $name => $route) {
-            $this->router->addRoute(
+            $this->router->addRoute($name, $route['path'], $route['controller']);
         }
 
         return $this;
@@ -53,5 +57,15 @@ class Kernel
     public function handleRequest(): void
     {
         // TODO constuct a request object and call the router
+    }
+
+    /**
+     * Dump routes: for debugging
+     *
+     * @return string[]
+     */
+    public function dumpRoutes()
+    {
+        return $this->router->getRoutes();
     }
 }
