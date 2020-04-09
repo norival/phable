@@ -1,5 +1,5 @@
 {
-    "name": "norival/hathi",
+    "name": "norival/phable",
     "description": "A lightweight MVC php framework",
     "type": "library",
     "license": "GPL",
@@ -9,5 +9,15 @@
             "email": "xavier@norival.dev"
         }
     ],
-    "require": {}
+    "autoload": {
+        "psr-4": {
+            "Norival\\Phable\\": ""
+        },
+        "exclude-from-classmap": [
+            "/Tests/"
+        ]
+    },
+    "require": {
+        "twig/twig": "^3.0"
+    }
 }
