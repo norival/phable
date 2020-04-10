@@ -1,10 +1,10 @@
 <?php
 
-namespace Norival\Phable\tests;
+namespace Norival\Spine\tests;
 
-use Norival\Phable\Exceptions\NoRouteException;
-use Norival\Phable\Kernel\Kernel;
-use Norival\Phable\Router\Route;
+use Norival\Spine\Exceptions\NoRouteException;
+use Norival\Spine\Core\Kernel;
+use Norival\Spine\Core\Route;
 use PHPUnit\Framework\TestCase;
 
 class KernelTest extends TestCase

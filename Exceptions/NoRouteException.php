@@ -1,6 +1,6 @@
 <?php
 
-namespace Norival\Phable\Exceptions;
+namespace Norival\Spine\Exceptions;
 
 class NoRouteException extends \Exception
 {

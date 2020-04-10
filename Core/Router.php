@@ -1,6 +1,8 @@
 <?php
 
-namespace Norival\Phable\Router;
+namespace Norival\Spine\Core;
+
+use Norival\Spine\Core\Route;
 
 /**
  * Router class

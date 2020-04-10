@@ -1,8 +1,8 @@
 <?php
 
-namespace Norival\Phable\tests;
+namespace Norival\Spine\tests;
 
-use Norival\Phable\Controller\AbstractController;
+use Norival\Spine\Core\AbstractController;
 
 class TestController extends AbstractController
 {

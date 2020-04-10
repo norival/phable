@@ -1,6 +1,6 @@
 <?php
 
-namespace Norival\Phable\Controller;
+namespace Norival\Spine\Core;
 
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;

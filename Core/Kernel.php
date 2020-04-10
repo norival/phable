@@ -1,9 +1,9 @@
 <?php
 
-namespace Norival\Phable\Kernel;
+namespace Norival\Spine\Core;
 
-use Norival\Phable\Exceptions\NoRouteException;
-use Norival\Phable\Router\Router;
+use Norival\Spine\Exceptions\NoRouteException;
+use Norival\Spine\Core\Router;
 
 /**
  * Kernel class
@@ -12,7 +12,7 @@ use Norival\Phable\Router\Router;
  */
 class Kernel
 {
-    private \Norival\Phable\Router\Router $router;
+    private \Norival\Spine\Core\Router $router;
 
     public function __construct()
     {
@@ -26,7 +26,7 @@ class Kernel
      */
     public function boot(string $configFile): self
     {
-        /* @var $routes \Phable\Router\Route[] */
+        /* @var $routes \Spine\Core\Route[] */
         $routes = [];
 
         // TODO load configuration

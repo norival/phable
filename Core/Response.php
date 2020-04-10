@@ -1,6 +1,6 @@
 <?php
 
-namespace Norival\Phable\Response;
+namespace Norival\Spine\Core;
 
 class Response
 {

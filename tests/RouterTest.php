@@ -1,15 +1,15 @@
 <?php
 
-namespace Norival\Phable\tests;
+namespace Norival\Spine\tests;
 
-use Norival\Phable\Controller\AbstractController;
-use Norival\Phable\Router\Route;
-use Norival\Phable\Router\Router;
+use Norival\Spine\Core\AbstractController;
+use Norival\Spine\Core\Route;
+use Norival\Spine\Core\Router;
 use PHPUnit\Framework\TestCase;
 
 class RouterTest extends TestCase
 {
-    private \Norival\Phable\Router\Router $router;
+    private \Norival\Spine\Core\Router $router;
 
     public function setUp(): void
     {
@@ -63,14 +63,14 @@ class RouterTest extends TestCase
 
     public function testResolvePathNoSlug(): void
     {
-        $this->router->addRoute('test', '/test', '\Norival\Phable\tests\TestController@testNoSlug');
+        $this->router->addRoute('test', '/test', '\Norival\Spine\tests\TestController@testNoSlug');
         $this->assertIsInt($this->router->resolve('/test'));
         $this->assertEquals(1, $this->router->resolve('/test'));
     }
 
     public function testResolvePathSlug(): void
     {
-        $this->router->addRoute('test', '/test/{slug}', '\Norival\Phable\tests\TestController@testSlug');
+        $this->router->addRoute('test', '/test/{slug}', '\Norival\Spine\tests\TestController@testSlug');
         $this->assertIsInt($this->router->resolve('/test/coucou'));
         $this->assertEquals(1, $this->router->resolve('/test/coucou'));
     }

@@ -1,15 +1,15 @@
 <?php
 
-namespace Norival\Phable\tests;
+namespace Norival\Spine\tests;
 
-use Norival\Phable\Controller\AbstractController;
-use Norival\Phable\Router\Route;
+use Norival\Spine\Core\AbstractController;
+use Norival\Spine\Core\Route;
 use PHPUnit\Framework\TestCase;
 
 class RouteTest extends TestCase
 {
-    private \Norival\Phable\Router\Route $route;
-    private \Norival\Phable\Router\Route $routeWithSlug;
+    private \Norival\Spine\Core\Route $route;
+    private \Norival\Spine\Core\Route $routeWithSlug;
 
     public function setUp(): void
     {
