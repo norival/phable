@@ -8,11 +8,12 @@ namespace Norival\Spine\Core;
  * @author Xavier Laviron <xavier@norival.dev>
  * @see RouteInterface
  */
-class Route implements RouteInterface
+class Route
 {
+    private string $controller;
+    private string $method;
     private string $name;
     private string $pattern;
-    private string $controller;
     private array $parameters;
 
     /**
@@ -21,26 +22,33 @@ class Route implements RouteInterface
      * @param  string $name
      * @param  string $pattern
      * @param  string $controller
+     * @param  string $method
      */
-    public function __construct(string $name, string $pattern, string $controller)
+    public function __construct(string $name, string $pattern, string $controller, string $method = 'GET')
     {
+        $this->controller = $controller;
+        $this->method     = $method;
         $this->name       = $name;
         $this->pattern    = $pattern;
-        $this->controller = $controller;
 
-        $this->parameters = $this->extractParameters();
+        $this->parameters = $this->fillParameters();
         /* var_dump($this->parameters); */
     }
 
     /**
      * Whether a route match or not
      *
-     * @param  string $pattern
+     * @param  string $uri
+     * @param  string $method
      * @return bool
      */
-    public function match(string $pattern): bool
+    public function match(string $uri, string $method): bool
     {
-        $pattern      = explode('/', trim($pattern, '/'));
+        if ($method !== $this->method) {
+            return false;
+        }
+
+        $pattern      = explode('/', trim($uri, '/'));
         $routePattern = explode('/', trim($this->pattern, '/'));
 
         if (count($pattern) !== count($routePattern)) {
@@ -87,16 +95,38 @@ class Route implements RouteInterface
      *
      * @return array
      */
-    private function extractParameters(): array
+    private function fillParameters(): array
     {
-        $pattern = explode('/', trim($this->pattern, '/'));
+        $chunks = explode('/', trim($this->pattern, '/'));
         $parameters = [];
 
-        for ($i = 0; $i < count($pattern); $i++) {
-            if (preg_match('/^{.*}$/', $pattern[$i])) {
-                $name = preg_replace('/{|}/', '', $pattern[$i]);
-                $parameters[$name] = 'condition';
+        for ($i = 0; $i < count($chunks); $i++) {
+            if (preg_match('/^{.*}$/', $chunks[$i])) {
+                $name = preg_replace('/{|}/', '', $chunks[$i]);
+                $parameters[$i] = $name;
             }
+        }
+
+        return $parameters;
+    }
+
+    /**
+     * Extract route parameters for a given path
+     *
+     * @param  string $path
+     * @return array
+     */
+    public function extractParameters(string $path): array
+    {
+        if (empty($this->parameters)) {
+            return [];
+        }
+
+        $parameters = [];
+        $chunks = explode('/', trim($path, '/'));
+
+        foreach ($this->parameters as $index => $name) {
+            $parameters[$name] = $chunks[$index];
         }
 
         return $parameters;
